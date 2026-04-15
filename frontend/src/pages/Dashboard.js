@@ -338,18 +338,7 @@ export default function Dashboard() {
               { label: "In Progress",  value: stats.inProgress, color: "#d97706", icon: "⟳" },
               { label: "Completed",    value: stats.done,       color: "#16a34a", icon: "✓" },
             ].map((s) => (
-              <div
-  key={s.label}
-  style={S.statCard}
-  onMouseEnter={(e) => {
-    e.currentTarget.style.transform = "translateY(-5px) scale(1.02)";
-    e.currentTarget.style.boxShadow = "0 10px 25px rgba(0,0,0,0.2)";
-  }}
-  onMouseLeave={(e) => {
-    e.currentTarget.style.transform = "translateY(0) scale(1)";
-    e.currentTarget.style.boxShadow = "none";
-  }}
->
+              <div key={s.label} style={S.statCard}>
                 <div style={{ ...S.statAccent, background: s.color }} />
                 <div style={{ ...S.statNum, color: s.color }}>{s.value}</div>
                 <div style={S.statLabel}>{s.label}</div>
@@ -397,18 +386,7 @@ export default function Dashboard() {
                   const pr2  = getCfg(PRIORITIES, task.priority);
                   const done = task.status === "done";
                   return (
-                    <div
-  key={task._id}
-  style={S.taskRow}
-  onMouseEnter={(e) => {
-    e.currentTarget.style.background = "#f9f9ff";
-    e.currentTarget.style.transform = "translateX(5px)";
-  }}
-  onMouseLeave={(e) => {
-    e.currentTarget.style.background = "transparent";
-    e.currentTarget.style.transform = "translateX(0)";
-  }}
->
+                    <div key={task._id} style={S.taskRow}>
                       <button onClick={() => toggleDone(task)}
                         style={{ ...S.check, ...(done ? S.checkDone : {}) }} title="Toggle done">
                         {done && "✓"}
@@ -520,18 +498,7 @@ export default function Dashboard() {
                     {task.description && <div style={{ fontSize: 12, color: "#aaa", marginTop: 3 }}>{task.description}</div>}
                   </div>
                   <Badge cfg={getCfg(STATUSES, task.status)} />
-                  <button
-  onClick={() => setModal({})}
-  style={S.addBtn}
-  onMouseEnter={(e) => {
-    e.target.style.transform = "scale(1.05)";
-    e.target.style.boxShadow = "0 8px 20px rgba(124,107,255,0.4)";
-  }}
-  onMouseLeave={(e) => {
-    e.target.style.transform = "scale(1)";
-    e.target.style.boxShadow = "none";
-  }}
-></button>
+                  <button onClick={() => setModal(task)} style={{ ...S.iconBtn, marginLeft: 6 }}>✏️</button>
                 </div>
               ))}
             </div>
@@ -553,8 +520,10 @@ export default function Dashboard() {
 /* ─── Styles ─────────────────────────────────────────────── */
 const st = {
   page: {
-  minHeight: "100vh",
-  background: "linear-gradient(135deg, #667eea, #764ba2)",
+    display: "grid", gridTemplateColumns: "240px 1fr",
+    minHeight: "100vh",
+    fontFamily: "'Segoe UI', system-ui, -apple-system, sans-serif",
+    background: "#f5f5fb",
   },
   sidebar: {
     background: DARK_BG, display: "flex", flexDirection: "column",
@@ -597,40 +566,27 @@ const st = {
   topTitle: { fontSize: 16, fontWeight: 700, color: "#111" },
   topSub:   { fontSize: 12, color: "#bbb", marginTop: 2 },
   addBtn: {
-  padding: "9px 20px",
-  fontSize: 13,
-  fontWeight: 700,
-  background: PURPLE,
-  color: "#fff",
-  border: "none",
-  borderRadius: 9,
-  cursor: "pointer",
-  fontFamily: "inherit",
-  transition: "all 0.3s ease",
-},
+    padding: "9px 20px", fontSize: 13, fontWeight: 700,
+    background: PURPLE, color: "#fff",
+    border: "none", borderRadius: 9, cursor: "pointer", fontFamily: "inherit",
+  },
 
   inner: { padding: "28px 28px 48px", flex: 1 },
 
   statsGrid: { display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12, marginBottom: 24 },
   statCard: {
-  background: "linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7))",
-  backdropFilter: "blur(12px)",
-  border: "1px solid rgba(255,255,255,0.3)",
-  transition: "all 0.3s ease",
-  cursor: "pointer",
-  boxShadow: "0 8px 30px rgba(0,0,0,0.1)",
-},
+    background: "#fff", border: "1px solid #e8e8f0",
+    borderRadius: 13, padding: "18px 20px",
+    position: "relative", overflow: "hidden",
+  },
   statAccent: { position: "absolute", top: 0, left: 0, right: 0, height: 3, borderRadius: "13px 13px 0 0" },
-  statNum:    { fontSize: 36, fontWeight: 800, lineHeight: 1, marginBottom: 4,color: "#111" },
+  statNum:    { fontSize: 36, fontWeight: 800, lineHeight: 1, marginBottom: 4 },
   statLabel:  { fontSize: 11, textTransform: "uppercase", letterSpacing: "0.07em", color: "#999" },
   statIcon:   { position: "absolute", bottom: 14, right: 16, fontSize: 24, opacity: 0.1 },
 
   twoCol: { display: "grid", gridTemplateColumns: "1fr 300px", gap: 16, marginBottom: 24 },
 
-  taskCard: {
-  background: "rgba(255,255,255,0.2)",
-  backdropFilter: "blur(8px)",
-  border: "1px solid rgba(255,255,255,0.2)"},
+  card: { background: "#fff", border: "1px solid #e8e8f0", borderRadius: 13, padding: "20px 22px" },
   cardHd: {
     display: "flex", alignItems: "center", justifyContent: "space-between",
     marginBottom: 18, flexWrap: "wrap", gap: 8,
@@ -649,13 +605,9 @@ const st = {
   },
 
   taskRow: {
-  display: "flex",
-  alignItems: "flex-start",
-  gap: 12,
-  padding: "12px 0",
-  borderBottom: "1px solid #f4f4f8",
-  transition: "all 0.25s ease",
-},
+    display: "flex", alignItems: "flex-start", gap: 12,
+    padding: "12px 0", borderBottom: "1px solid #f4f4f8",
+  },
   check: {
     width: 20, height: 20, borderRadius: "50%",
     border: "2px solid #d8d8ec", background: "transparent",
