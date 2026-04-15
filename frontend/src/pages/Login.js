@@ -23,7 +23,7 @@ localStorage.setItem("user", JSON.stringify(res.data.user)); // ADD THIS
       localStorage.setItem("user", JSON.stringify(res.data.user));
       navigate("/dashboard");
     } catch (err) {
-      setError(err.response?.data?.message || "Invalid email or password.");
+  alert(err.response?.data?.message || "Login failed");
     } finally {
       setLoading(false);
     }
