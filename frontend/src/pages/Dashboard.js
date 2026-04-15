@@ -613,14 +613,15 @@ const st = {
 
   statsGrid: { display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12, marginBottom: 24 },
   statCard: {
-  background: "rgba(255,255,255,0.15)",
-  backdropFilter: "blur(10px)",
-  border: "1px solid rgba(255,255,255,0.2)",
+  background: "linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7))",
+  backdropFilter: "blur(12px)",
+  border: "1px solid rgba(255,255,255,0.3)",
   transition: "all 0.3s ease",
   cursor: "pointer",
+  boxShadow: "0 8px 30px rgba(0,0,0,0.1)",
 },
   statAccent: { position: "absolute", top: 0, left: 0, right: 0, height: 3, borderRadius: "13px 13px 0 0" },
-  statNum:    { fontSize: 36, fontWeight: 800, lineHeight: 1, marginBottom: 4 },
+  statNum:    { fontSize: 36, fontWeight: 800, lineHeight: 1, marginBottom: 4,color: "#111" },
   statLabel:  { fontSize: 11, textTransform: "uppercase", letterSpacing: "0.07em", color: "#999" },
   statIcon:   { position: "absolute", bottom: 14, right: 16, fontSize: 24, opacity: 0.1 },
 
